@@ -2,12 +2,15 @@
 name: Deploy to Production
 
 on:
-  push:
-    branches:
-      - main
+    pull_request:
+        types:
+          - closed
+        branches:
+          - 'release'
 
 jobs:
   deploy:
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     environment: production
     steps:
